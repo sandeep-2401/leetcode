@@ -10,25 +10,27 @@ public:
             }
 
             if(st.empty()) {
-                st.push(nums2[i]);
                 vec[i]=-1;
             }
 
-            else if(nums2[i]<st.top()){
+            else {
                 vec[i]=st.top();
-                st.push(nums2[i]);
             }
+
+            st.push(nums2[i]);
         }
 
-        vector<int> ans;
-        for(int i=0;i<nums1.size();i++){
-            for(int j=0;j<nums2.size();j++){
-                if(nums1[i]==nums2[j]) {
-                    ans.push_back(vec[j]);
-                    break;
-                }
-            }
+        unordered_map<int, int> mp;
+        for(int i = 0; i < nums2.size(); i++){
+            mp[nums2[i]] = vec[i];
         }
+        
+        vector<int> ans;
+        
+        for(int i = 0; i < nums1.size(); i++){
+            ans.push_back(mp[nums1[i]]);
+        }
+        
 
         return ans;
     }
